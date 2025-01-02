@@ -120,9 +120,14 @@ const About = () => {
             <p className="text-lg leading-relaxed mb-4" style={{ color: '#545454' }}>
                 We create unique Jewellery in silver, gold & gems and we've been doing it for over 25 years.
             </p>
-           <Link href={'/blog'}> <button className="bg-transparent hover:bg-pink-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded transition duration-300" style={{ color: '#545454', borderColor: '#545454' }}>
-                VISIT THE SHOP
-            </button></Link>
+            <Link href={'/blog'}>
+  <button
+    className="bg-transparent hover:bg-pink-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded transition duration-300"
+    style={{ color: '#545454', borderColor: '#545454' }}
+  >
+    VISIT THE SHOP
+  </button>
+</Link>
           </div>
 
         </div>

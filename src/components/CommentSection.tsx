@@ -1,6 +1,7 @@
-'use client';
+"use client";
 
 import React, { useState } from "react";
+import Image from "next/image"; // Importing the Next.js Image component
 
 type Comment = {
   id: number;
@@ -13,29 +14,22 @@ const CommentSection: React.FC = () => {
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [editingText, setEditingText] = useState<string>("");
 
-  // Add a new comment
   const handleAddComment = () => {
     if (newComment.trim()) {
-      setComments([
-        ...comments,
-        { id: Date.now(), text: newComment.trim() },
-      ]);
+      setComments([...comments, { id: Date.now(), text: newComment.trim() }]);
       setNewComment("");
     }
   };
 
-  // Delete a comment
   const handleDeleteComment = (id: number) => {
     setComments(comments.filter((comment) => comment.id !== id));
   };
 
-  // Start editing a comment
   const handleEditComment = (id: number, text: string) => {
     setEditingCommentId(id);
     setEditingText(text);
   };
 
-  // Save edited comment
   const handleSaveEdit = () => {
     setComments(
       comments.map((comment) =>
@@ -49,10 +43,9 @@ const CommentSection: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-gradient-to-b from-blue-100 to-white shadow-lg rounded-lg mt-10  w-full  mb-8">
+    <div className="max-w-3xl mx-auto p-6 bg-gradient-to-b from-blue-100 to-white shadow-lg rounded-lg mt-10 w-full mb-8">
       <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Comment Section</h2>
 
-      {/* Add Comment */}
       <div className="flex gap-4 mb-6">
         <input
           type="text"
@@ -69,7 +62,6 @@ const CommentSection: React.FC = () => {
         </button>
       </div>
 
-      {/* Comments List */}
       <div className="space-y-6">
         {comments.map((comment) => (
           <div
@@ -77,11 +69,12 @@ const CommentSection: React.FC = () => {
             className="border border-gray-200 rounded-lg p-4 flex items-start justify-between shadow-sm hover:shadow-md transition"
           >
             <div className="flex items-center gap-4 flex-1">
-              {/* Profile Image */}
-              <img
+              <Image
                 src="/icon.png"
                 alt="Profile"
-                className="w-12 h-10 border-gray-300 rounded-full"
+                width={48}
+                height={40}
+                className="rounded-full"
               />
               {editingCommentId === comment.id ? (
                 <input

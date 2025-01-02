@@ -106,19 +106,20 @@ const blogPosts = [
 ]
 
 export default async function Blog() {
-  const res = await client.fetch(
+ 
+  await client.fetch(
     "*[_type == 'landingPage'][0].sections[1].post[]{ 'postTitle' : postTitle,'postId': postId, 'postDescription': postDescription, 'postImage': postImage.asset->url,  'postReadTime': postReadTime,   'postDate': postDate}"
-  )
+  );
 
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-8">Jewellery Blog</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogPosts.map((post) => {
-          // Add query parameter conditionally
-          const href = parseInt(post.readTime) > 5 
-            ? `/blog/${post.id}?showDetails=true`
-            : `/blog/${post.id}`
+          const href =
+            parseInt(post.readTime) > 5
+              ? `/blog/${post.id}?showDetails=true`
+              : `/blog/${post.id}`;
 
           return (
             <Card key={post.id} className="overflow-hidden">
@@ -142,13 +143,12 @@ export default async function Blog() {
                 </Link>
               </CardFooter>
             </Card>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }
-
 
 
 
