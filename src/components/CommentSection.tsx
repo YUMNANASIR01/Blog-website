@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image"; // Importing the Next.js Image component
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 type Comment = {
   id: number;
@@ -14,15 +14,30 @@ const CommentSection: React.FC = () => {
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [editingText, setEditingText] = useState<string>("");
 
+  // Load comments from localStorage on mount
+  useEffect(() => {
+    const savedComments = localStorage.getItem("comments");
+    if (savedComments) {
+      setComments(JSON.parse(savedComments));
+    }
+  }, []);
+
+  // Save comments to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("comments", JSON.stringify(comments));
+  }, [comments]);
+
   const handleAddComment = () => {
     if (newComment.trim()) {
-      setComments([...comments, { id: Date.now(), text: newComment.trim() }]);
+      const newCommentObject = { id: Date.now(), text: newComment.trim() };
+      setComments([...comments, newCommentObject]);
       setNewComment("");
     }
   };
 
   const handleDeleteComment = (id: number) => {
-    setComments(comments.filter((comment) => comment.id !== id));
+    const updatedComments = comments.filter((comment) => comment.id !== id);
+    setComments(updatedComments);
   };
 
   const handleEditComment = (id: number, text: string) => {
@@ -129,3 +144,4 @@ const CommentSection: React.FC = () => {
 };
 
 export default CommentSection;
+
