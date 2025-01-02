@@ -118,7 +118,7 @@ const About = () => {
                 />
             </div>
             <p className="text-lg leading-relaxed mb-4" style={{ color: '#545454' }}>
-                We create unique Jewellery in silver, gold & gems and we've been doing it for over 25 years.
+                We create unique Jewellery in silver, gold & gems and have been doing it for over 25 years.
             </p>
             <Link href={'/blog'}>
   <button
